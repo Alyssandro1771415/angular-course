@@ -1,0 +1,42 @@
+<h2>Course List</h2>
+
+<div class="form-group">
+    <label class="col-sm-2 col-from-label">Filter By:</label>
+
+    <div class="cel-sm-1">
+        <input [(ngModel)] = "filter" class="form-control">
+    </div>
+</div>
+
+<table class="table table-striped" [style.width.%]="100" [style.height.%]="40">
+    <thead>
+        <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Code</th>
+        <th>Release Date</th>
+        <th>Rating</th>
+        <th>Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor = "let course of filteredCourses"> 
+        <!--Aqui está dizendo que deve iniciar essa parte pegando Course de course.ts
+        e dando os valores declarados em courses criado no course-list.component.ts-->
+            <td><img [src]= "course.imageURL" width="30%"></td>
+            <!-- O atributo src deve estar entre [] pq apenas assim o angular irá entender que você quer mesclar o atributo
+            com alguma informação do componente. -->
+            <td>{{course.name}}</td>
+            <td>{{course.price}}</td>
+            <td>{{ course.code | uppercase | replace: '-': ' ' }}</td>
+            <td>{{course.releaseDate | date: 'dd/MM/yyyy'}}</td>
+            <th>
+                <app-star [rating]= "course.rating"></app-star>
+            </th>
+            <th>
+                <a [routerLink]='["/courses/info", course.id]' class="btn btn-primery">Edit</a>
+            </th>
+        </tr>
+    </tbody>
+</table>
