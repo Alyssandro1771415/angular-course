@@ -1,7 +1,7 @@
 <h2>Course List</h2>
 
 <div class="form-group">
-    <label class="col-sm-2 col-from-label">Filter By:</label>
+    <label class="col-sm-2 col-form-label">Filter By:</label>
 
     <div class="cel-sm-1">
         <input [(ngModel)] = "filter" class="form-control">
@@ -31,12 +31,13 @@
             <td>{{course.price}}</td>
             <td>{{ course.code | uppercase | replace: '-': ' ' }}</td>
             <td>{{course.releaseDate | date: 'dd/MM/yyyy'}}</td>
-            <th>
+            <td>
                 <app-star [rating]= "course.rating"></app-star>
-            </th>
-            <th>
-                <a [routerLink]='["/courses/info", course.id]' class="btn btn-primery">Edit</a>
-            </th>
+            </td>
+            <td>
+                <a [routerLink]="['/courses/info', course.id]" class="btn btn-primery mr-2">Edit</a>
+                <button (click)="deleteById(course.id)" class="btn btn-danger">Delete</button>
+            </td>
         </tr>
     </tbody>
 </table>

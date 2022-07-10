@@ -18,13 +18,32 @@ export class CourseListComponent implements OnInit {
 
     _courses: Course[] = [];
     
-    _filterBy!: string;
+    _filterBy: string|any;
 
     constructor(private courseService: CourseService) { }
 
     ngOnInit(): void{
-        this.courses = this.courseService.retrieveAll();
-        this.filteredCourses = this.courses;
+        this.retrieveAll();
+    }
+
+    retrieveAll(): void { 
+        this.courseService.retrieveAll().subscribe({
+            next: courses => {
+                this._courses = courses;
+                this.filteredCourses = this._courses;
+            },
+            error: err => console.log('Error', err) 
+        })
+    }
+
+    deleteById(courseId: number): void{
+        this.courseService.deleteById(courseId).subscribe({
+            next: () => {
+                console.log('Deleted with sucess')
+                this.retrieveAll();
+            },
+            error: err => console.log('Error', err)
+        })
     }
 
     set filter(value: string) { 
