@@ -24,7 +24,7 @@
         <tr *ngFor = "let course of filteredCourses"> 
         <!--Aqui está dizendo que deve iniciar essa parte pegando Course de course.ts
         e dando os valores declarados em courses criado no course-list.component.ts-->
-            <td><img [src]= "course.imageURL" width="30%"></td>
+            <td><img [src]="course.imageUrl" width="30%"></td>
             <!-- O atributo src deve estar entre [] pq apenas assim o angular irá entender que você quer mesclar o atributo
             com alguma informação do componente. -->
             <td>{{course.name}}</td>
